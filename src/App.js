@@ -6,30 +6,41 @@ import Search from './components/search/Search';
 class App extends Component {
   constructor(props){
     super(props);
+    this.state = {
+      data: [],
+      isLoading: true,
+    };
     console.log("app has started");
   }
-  componentWillMount(){
+
+  // fetchs api
+  componentDidMount(){
     Axios.get("https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000").then(data=>{
       console.log(data);
       this.setState({
-        apiData: data.data
+        data: data.data,isLoading: false
       });
     }).catch(err=>{
       console.log(err);
+      this.setState({error: err,isLoading: false});
       alert("Api request failed");
     });
   }
-  componentDidUpdate(){
-    console.log(this.state);
-  }
+
   render() {
+   const { isLoading } = this.state;
+   //render loading screen if api has not been fetched yet
+   if (isLoading) {
+     return (<div className="loading"></div>)
+   }
+
     return (
-      <div className="App container">
+      <div className="App container-default">
         <div className="header">
           <h1>Toronto Waste Lookup</h1>
         </div>
         <div className="Search-Area">
-          <Search></Search>
+          <Search {...this.state}></Search>
         </div>
       </div>
     );
