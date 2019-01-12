@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.container {
+    height: 100vh;
+    width:100%;
+}
+
+.App .header {
+    text-align: center;
+    color:white;
+    background-image: -webkit-gradient(linear, left top, right top, from(rgb(30,99,139)) , to(rgb(33,137,105)));
+    background-image: -webkit-linear-gradient(left, rgb(30,99,139) , rgb(33,137,105));
+    background-image: -o-linear-gradient(left, rgb(30,99,139) , rgb(33,137,105));
+    background-image: linear-gradient(to right, rgb(30,99,139) , rgb(33,137,105));
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.App .header h1 {
+    font-size: 2.5em;
+}
+
+/* clear floats */
+.clearfix {
+    clear: both;
+}

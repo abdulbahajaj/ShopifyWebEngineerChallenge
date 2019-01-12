@@ -1,0 +1,19 @@
+.searchBar {
+    text-align: center;
+    margin-top: 20px;
+}
+.searchBar input {
+    width: 88%;
+    height: 34px;
+    padding: 10px;
+    border: 1px solid rgb(170,170,170);
+    font-size: 1.5em;
+}
+#searchIcon {
+    float: right;
+    margin-right: 20px;
+}
+#searchIcon:hover {
+    cursor: pointer;
+}
+
