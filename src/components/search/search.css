@@ -23,6 +23,9 @@
 #searchIcon:hover {
     cursor: pointer;
 }
+img:hover {
+    cursor: pointer;
+}
 .iconstar {
     float: left;
     margin-right:10px;

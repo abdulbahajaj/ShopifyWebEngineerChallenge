@@ -102,7 +102,7 @@ class Search extends Component {
                                 <div className="col-md-6">
                                     <div className="title">
                                         <span className="iconstar">
-                                            {e.favorite ? <img src={greenStar} onClick={d => this.favorite(e.uuid)}></img> : <img src={greyStar} onClick={d => this.favorite(e.uuid)}></img> }                                           
+                                            {e.favorite ? <img src={greenStar} alt="greenstar" onClick={d => this.favorite(e.uuid)}></img> : <img src={greyStar} alt="greystar" onClick={d => this.favorite(e.uuid)}></img> }                                           
                                         </span>
                                         <h2>{e.title}</h2>
                                     </div>
@@ -132,7 +132,7 @@ class Search extends Component {
                                 <div className="col-md-6">
                                     <div className="title">
                                         <span className="iconstar">
-                                        {e.favorite ? <img src={greenStar} onClick={d => this.favorite(e.uuid)}></img> : <img src={greyStar} onClick={d => this.favorite(e.uuid)}></img> }                                           
+                                        {e.favorite ? <img src={greenStar} alt="greenstar" onClick={d => this.favorite(e.uuid)}></img> : <img src={greyStar} alt="greystar" onClick={d => this.favorite(e.uuid)}></img> }                                           
                                         </span>
                                         <h2>{e.title}</h2>
                                     </div>
@@ -164,14 +164,19 @@ class Search extends Component {
                         alt="green search icon"></img>
                     <div className="clearfix"></div>
                 </div>
-                <div className="searchContent">
+                <div className="searchContent" style={{paddingBottom:"20px"}}>
+                <div className="row">
                     {/* Cards */}
-                    {cards}
+                    <div className="col-md-12">
+                        {cards}
+                    </div>                    
+                </div>                  
                 </div>
                 <div
                     className="favorites"
                     style={{
-                    background: "rgb(247,254,250)"
+                    background: "rgb(247,254,250)",
+                    paddingBottom:"20px"
                 }}>
                     <div className="row">
                         <div className="title col-md-12">
@@ -179,7 +184,7 @@ class Search extends Component {
                                 style={{
                                 marginLeft: "29px",
                                 color: "rgb(35,153,92)"
-                            }}>Favorites</h1>
+                            }}>Favourites</h1>
                         </div>
                     </div>
                     <div className="favoriteContent">
