@@ -44,6 +44,7 @@ class Search extends Component {
             this.renderCard = this.filter(evt.target.value);
         }
     }
+    //filters array of data based on input
     filter(input) {
         var data = [];
         data = this
@@ -58,12 +59,13 @@ class Search extends Component {
             });
         return data;
     }
-
+    //allows search with enter key
     keyboardEnter(e) {
         if (e.keyCode === 13) {
             this.search();
         }
     }
+    //adds cards to favorite section or removes it
     favorite(e) {
         var indexObj = this.old.data.findIndex(item=> item.uuid === e);
         if (this.old.data[indexObj].favorite){
@@ -79,6 +81,7 @@ class Search extends Component {
         }
         this.forceUpdate();
     }
+    //rerenders components
     search() {
         console.log("searching")
         this.forceUpdate();
