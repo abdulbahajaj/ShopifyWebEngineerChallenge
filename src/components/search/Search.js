@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 //img
+import greyStar from "../../img/greyStar.PNG";
+import greenStar from "../../img/greenStar.PNG";
 import searchIcon from "../../img/searchIcon.PNG";
 //css
 import "./search.css";
@@ -25,18 +27,20 @@ class Search extends Component {
             .favorite
             .bind(this);
         var data = this.props;
+        for (var i = 0; i < data.data.length; i++){
+            data.data[i]["uuid"] = uuid.v4();
+            data.data[i]["favorite"] = false;
+        }
         this.old = data;
         this.renderCard = [];
         this.renderFavorite = [];
     }
     //handles input for search bar
     searchHandler(evt) {
-        console.log(this);
         if (evt.target.value === "") {
             this.renderCard = [];
             this.forceUpdate();
         } else {
-            console.log("render")
             this.renderCard = this.filter(evt.target.value);
         }
     }
@@ -49,7 +53,7 @@ class Search extends Component {
                 if (e.keywords.indexOf(input) !== -1) {
                     return e;
                 } else {
-                    return [];
+                    
                 }
             });
         return data;
@@ -61,18 +65,17 @@ class Search extends Component {
         }
     }
     favorite(e) {
-        if (this.renderCard[e].favorite) {
-            this.renderCard[e].favorite = false;
-            this
-                .renderFavorite
-                .pop();
-        } else {
-            this.renderCard[e].favorite = true;
-            console.log(this.old)
-            console.log(this.renderCard[e]);
-            this
-                .renderFavorite
-                .push(this.renderCard[e]);
+        var indexObj = this.old.data.findIndex(item=> item.uuid === e);
+        if (this.old.data[indexObj].favorite){
+            this.old.data[indexObj].favorite = false;
+            // remove from render
+            let indexOfFavorite = this.renderFavorite.findIndex(elm=> elm.uuid === e);
+            console.log(this.renderFavorite[indexOfFavorite]);
+            this.renderFavorite.splice(indexOfFavorite,1);
+        }else{
+            //add to rendered
+            this.old.data[indexObj].favorite = true;
+            this.renderFavorite.push(this.old.data[indexObj]);
         }
         this.forceUpdate();
     }
@@ -81,8 +84,6 @@ class Search extends Component {
         this.forceUpdate();
     }
     render() {
-        console.log("%c Render card :", "color:green");
-        console.log(this.renderCard.length)
         var cards = "";
         if (this.renderCard.length === 0) {
             cards = (
@@ -98,7 +99,7 @@ class Search extends Component {
                                 <div className="col-md-6">
                                     <div className="title">
                                         <span className="iconstar">
-                                            <button onClick={d => this.favorite(index)}>favorite</button>
+                                            {e.favorite ? <img src={greenStar} onClick={d => this.favorite(e.uuid)}></img> : <img src={greyStar} onClick={d => this.favorite(e.uuid)}></img> }                                           
                                         </span>
                                         <h2>{e.title}</h2>
                                     </div>
@@ -128,7 +129,7 @@ class Search extends Component {
                                 <div className="col-md-6">
                                     <div className="title">
                                         <span className="iconstar">
-                                            <button onClick={d => this.favorite(index)}>favorite</button>
+                                        {e.favorite ? <img src={greenStar} onClick={d => this.favorite(e.uuid)}></img> : <img src={greyStar} onClick={d => this.favorite(e.uuid)}></img> }                                           
                                         </span>
                                         <h2>{e.title}</h2>
                                     </div>
@@ -179,6 +180,7 @@ class Search extends Component {
                         </div>
                     </div>
                     <div className="favoriteContent">
+                    {/* Favorite Cards */}
                         {favoriteCards}
                     </div>
                 </div>
