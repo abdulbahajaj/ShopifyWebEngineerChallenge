@@ -83,7 +83,6 @@ class Search extends Component {
     }
     //rerenders components
     search() {
-        console.log("searching")
         this.forceUpdate();
     }
     render() {

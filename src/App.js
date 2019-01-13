@@ -15,13 +15,11 @@ class App extends Component {
 
   // fetchs api
   componentDidMount(){
-    Axios.get("https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000").then(data=>{
-      console.log(data);
+    Axios.get("https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000").then(data=>{      
       this.setState({
         data: data.data,isLoading: false
       });
     }).catch(err=>{
-      console.log(err);
       this.setState({error: err,isLoading: false});
       alert("Api request failed");
     });
