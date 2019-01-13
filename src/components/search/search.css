@@ -30,16 +30,21 @@ img:hover {
     float: left;
     margin-right:10px;
 }
-ul li {
-    line-height: 2.5;
-    font-size: 1.2em;
+.description  {
+    font-size: 1.5em;
+    line-height: 40px;
+    padding: 10px;
+    color:#212121;
+}
+.description div ul li span {
+    font-size: 1em !important;
+    padding: 10px;
+    color:#212121;
 }
 .card {
-    width: 80%;
+    width: 95%;
+    padding-right:50px;
     margin: 0 auto;
     margin-top: 20px;
-}
-.favorites {
-    width:100%;
-    height:100%;
+    text-align:left;
 }

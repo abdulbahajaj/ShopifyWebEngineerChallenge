@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component,Fragment} from 'react';
 //img
 import greyStar from "../../img/greyStar.PNG";
 import greenStar from "../../img/greenStar.PNG";
@@ -7,6 +7,7 @@ import searchIcon from "../../img/searchIcon.PNG";
 import "./search.css";
 //utils
 import uuid from "uuid";
+import ReactParser from "react-html-parser";
 
 class Search extends Component {
     constructor(props) {
@@ -70,12 +71,11 @@ class Search extends Component {
         var indexObj = this.old.data.findIndex(item=> item.uuid === e);
         if (this.old.data[indexObj].favorite){
             this.old.data[indexObj].favorite = false;
-            // remove from render
+            // remove from view
             let indexOfFavorite = this.renderFavorite.findIndex(elm=> elm.uuid === e);
-            console.log(this.renderFavorite[indexOfFavorite]);
             this.renderFavorite.splice(indexOfFavorite,1);
         }else{
-            //add to rendered
+            //add to rendered favourite cards
             this.old.data[indexObj].favorite = true;
             this.renderFavorite.push(this.old.data[indexObj]);
         }
@@ -95,7 +95,9 @@ class Search extends Component {
         } else {
             cards = this
                 .renderCard
-                .map((e, index) => {
+                .map((e, index) => {          
+                     var text = ReactParser(e.body);
+                     var elm = <div dangerouslySetInnerHTML={{__html:text.toString()}}></div>
                     return (
                         <div className="card" key={index}>
                             <div className="row">
@@ -109,8 +111,8 @@ class Search extends Component {
                                 </div>
                                 <div className="clearfix"></div>
                                 <div className="col-md-6">
-                                    <div className="description">
-                                        {e.body}
+                                    <div className="description" id="renderHTML">                         
+                                        {elm}
                                     </div>
                                 </div>
                             </div>
@@ -126,6 +128,8 @@ class Search extends Component {
             favoriteCards = this
                 .renderFavorite
                 .map((e, index) => {
+                    var text = ReactParser(e.body);
+                     var elm = <div dangerouslySetInnerHTML={{__html:text.toString()}}></div>
                     return (
                         <div className="card" key={index}>
                             <div className="row">
@@ -140,7 +144,7 @@ class Search extends Component {
                                 <div className="clearfix"></div>
                                 <div className="col-md-6">
                                     <div className="description">
-                                        {e.body}
+                                        {elm}
                                     </div>
                                 </div>
                             </div>
@@ -164,6 +168,7 @@ class Search extends Component {
                         alt="green search icon"></img>
                     <div className="clearfix"></div>
                 </div>
+                {/* SEARCH CONTENT AREA */}
                 <div className="searchContent" style={{paddingBottom:"20px"}}>
                 <div className="row">
                     {/* Cards */}
@@ -172,6 +177,7 @@ class Search extends Component {
                     </div>                    
                 </div>                  
                 </div>
+                {/* FAVOURITE CARDS AREA */}
                 <div
                     className="favorites"
                     style={{
@@ -183,6 +189,7 @@ class Search extends Component {
                             <h1
                                 style={{
                                 marginLeft: "29px",
+                                paddingTop:"20px",
                                 color: "rgb(35,153,92)"
                             }}>Favourites</h1>
                         </div>
