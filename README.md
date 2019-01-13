@@ -1,4 +1,5 @@
 ## Shopify Web Engineer Challenge repo
+live version of the site is [here](https://moaqsam.github.io/ShopifyWebEngineerChallenge/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
