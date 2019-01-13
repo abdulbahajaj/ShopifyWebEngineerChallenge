@@ -1,4 +1,4 @@
-import React, {Component,Fragment} from 'react';
+import React, {Component} from 'react';
 //img
 import greyStar from "../../img/greyStar.PNG";
 import greenStar from "../../img/greenStar.PNG";
